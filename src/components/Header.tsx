@@ -1,4 +1,8 @@
+import { useAuth } from '../hooks/useAuth'
+
 function Header() {
+  const { user, signOut } = useAuth()
+
   return (
     <header className="bg-gray-900 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,6 +32,32 @@ function Header() {
               tabily
             </span>
           </div>
+
+          <nav className="flex items-center gap-6">
+            {user && (
+              <a
+                href="/trips"
+                className="text-gray-300 hover:text-emerald-300 transition-colors font-medium"
+              >
+                My trips
+              </a>
+            )}
+            {user ? (
+              <button
+                onClick={signOut}
+                className="text-gray-300 hover:text-emerald-300 transition-colors font-medium"
+              >
+                Logout
+              </button>
+            ) : (
+              <a
+                href="/"
+                className="text-gray-300 hover:text-emerald-300 transition-colors font-medium"
+              >
+                Login
+              </a>
+            )}
+          </nav>
         </div>
       </div>
     </header>

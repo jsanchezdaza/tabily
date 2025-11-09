@@ -26,4 +26,21 @@ test.describe('Header', () => {
     // Should be a dark color (gray-900 or similar)
     expect(bgColor).toBeTruthy()
   })
+
+  test('does not display My trips link when not logged in', async ({ page }) => {
+    await expect(page.locator('header').getByRole('link', { name: /my trips/i })).not.toBeVisible()
+  })
+
+  test('displays Login link when not logged in', async ({ page }) => {
+    await expect(page.locator('header').getByRole('link', { name: /login/i })).toBeVisible()
+  })
+
+  test('does not display Logout button when not logged in', async ({ page }) => {
+    await expect(page.locator('header').getByRole('button', { name: /logout/i })).not.toBeVisible()
+  })
+
+  test('navigation is visible on the right side', async ({ page }) => {
+    const nav = page.locator('header nav')
+    await expect(nav).toBeVisible()
+  })
 })
