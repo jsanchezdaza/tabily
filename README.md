@@ -1,4 +1,4 @@
-# Tabily - AI Trip Planner
+# tabily - AI Trip Planner
 
 An AI-powered trip planning application built with React, TypeScript, Tailwind CSS, and Supabase.
 

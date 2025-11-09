@@ -6,7 +6,7 @@ test.describe('Login Page', () => {
   })
 
   test('displays login page with correct title', async ({ page }) => {
-    await expect(page).toHaveTitle(/Tabily/)
+    await expect(page).toHaveTitle(/tabily/)
     await expect(page.getByRole('heading', { name: /welcome to tabily/i })).toBeVisible()
   })
 

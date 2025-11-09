@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react'
 import { useAuth } from '../hooks/useAuth'
+import Header from './Header'
 
 interface FormErrors {
   email?: string
@@ -52,12 +53,14 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome to Tabily
+              Welcome to tabily
             </h1>
             <p className="text-gray-600">Plan your perfect trip with AI</p>
           </div>
@@ -81,7 +84,7 @@ function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
                 placeholder="you@example.com"
               />
               {errors.email && (
@@ -101,7 +104,7 @@ function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
                 placeholder="••••••••"
               />
               {errors.password && (
@@ -112,7 +115,7 @@ function Login() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-emerald-300 text-gray-900 py-3 rounded-lg font-medium hover:bg-emerald-400 transition duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
@@ -157,17 +160,18 @@ function Login() {
 
           <div className="mt-6 text-center text-sm text-gray-600">
             Don't have an account?{' '}
-            <a href="/signup" className="text-blue-600 font-medium hover:text-blue-700">
+            <a href="/signup" className="text-emerald-600 font-medium hover:text-emerald-700">
               Sign Up
             </a>
           </div>
         </div>
 
         <footer className="mt-8 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Tabily. All rights reserved.
+          © {new Date().getFullYear()} tabily. All rights reserved.
         </footer>
       </div>
     </div>
+    </>
   )
 }
 
