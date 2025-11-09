@@ -1,0 +1,73 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+# Development Guidelines for Tabily
+
+## Package Manager
+
+**ALWAYS use pnpm** - Never use npm or yarn
+- Commands: `pnpm install`, `pnpm dev`, `pnpm build`
+- Lock file: `pnpm-lock.yaml`
+
+## Git Commit Guidelines
+
+**NO CO-AUTHOR references** - Never add "Co-authored-by: Claude" or similar
+- NO AI references in commit messages
+- Write commits as if made by a human developer
+- Use conventional commits: `feat:`, `fix:`, `chore:`, `docs:`
+
+### Examples:
+✅ `feat: add new feature`
+✅ `fix: resolve bug in component`
+✅ `chore: update dependencies`
+❌ `feat: add feature (with Claude assistance)`
+❌ `Co-authored-by: Claude <claude@anthropic.com>`
+
+## Lean & XP Principles (MANDATORY)
+
+- **Simplest thing that works** - No over-engineering
+- **YAGNI (You Aren't Gonna Need It)** - Don't add features not explicitly requested
+- **Small iterations** - Implement minimal viable version first
+- **Refactor continuously** - Clean code as you go
+- **Test-Driven Development (TDD)** - ALWAYS write tests first, then implementation
+  - Red: Write a failing test
+  - Green: Write minimal code to pass
+  - Refactor: Clean up while keeping tests green
+- **User stories first** - Always think from the user's perspective
+
+## Pre-Commit Refactor Check (MANDATORY)
+
+**BEFORE every commit, perform a refactor assessment:**
+
+1. **Code Quality Check**
+   - Are there any duplicated patterns in the new code?
+   - Can any new components/functions be simplified or extracted?
+   - Are there magic numbers or hardcoded strings that should be constants?
+   - Is the code following existing patterns and conventions?
+
+2. **Performance & Maintainability**
+   - Are there unnecessary re-renders or expensive operations?
+   - Can any complex logic be broken down into smaller functions?
+   - Are TypeScript types properly defined (no `any` usage)?
+   - Is error handling consistent across similar components?
+
+3. **Testing & Documentation**
+   - Do the changes maintain existing test coverage?
+   - Are new utilities/components covered by tests if critical?
+   - Is the code self-documenting or does it need comments?
+
+4. **Integration Review**
+   - Does the new code integrate well with existing components?
+   - Are there opportunities to reuse existing utilities/components?
+   - Does it follow the established file structure and naming conventions?
+
+**If any refactoring is needed, do it BEFORE the commit. Keep the commit focused and clean.**
+
+## Pre-Commit File Review (MANDATORY)
+
+**ALWAYS show all modified files before committing to git:**
+- Use `git status` and `git diff` to show exactly what will be committed
+- Display the changes clearly so the user can review them
+- Only proceed with the commit after showing the file changes
+- This ensures transparency and allows for final review before version control
