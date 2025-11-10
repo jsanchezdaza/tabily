@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import Header from './Header'
 import Footer from './Footer'
+import PasswordInput from './PasswordInput'
 import { MIN_PASSWORD_LENGTH, VALIDATION_MESSAGES } from '../constants/validation'
 import { validateEmail } from '../utils/validation'
 
@@ -103,20 +104,13 @@ function Login() {
                 {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
               </div>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
-                  placeholder="••••••••"
-                />
-                {errors.password && <p className="mt-2 text-sm text-red-600">{errors.password}</p>}
-              </div>
+              <PasswordInput
+                id="password"
+                label="Password"
+                value={password}
+                onChange={setPassword}
+                error={errors.password}
+              />
 
               <button
                 type="submit"

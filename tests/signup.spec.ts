@@ -121,4 +121,52 @@ test.describe('Sign Up Page', () => {
 
     await expect(submitButton).toBeDisabled()
   })
+
+  test('should display password visibility toggle buttons for both password fields', async ({
+    page,
+  }) => {
+    await page.goto('http://localhost:5173/signup')
+
+    const passwordToggle = page.locator('input#password ~ button')
+    const confirmPasswordToggle = page.locator('input#confirmPassword ~ button')
+
+    await expect(passwordToggle).toBeVisible()
+    await expect(confirmPasswordToggle).toBeVisible()
+  })
+
+  test('should toggle password field visibility independently', async ({ page }) => {
+    await page.goto('http://localhost:5173/signup')
+
+    const passwordInput = page.locator('input[name="password"]')
+    const confirmPasswordInput = page.locator('input[name="confirmPassword"]')
+    const passwordToggle = page.locator('input#password ~ button')
+
+    await expect(passwordInput).toHaveAttribute('type', 'password')
+    await expect(confirmPasswordInput).toHaveAttribute('type', 'password')
+
+    await passwordToggle.click()
+    await expect(passwordInput).toHaveAttribute('type', 'text')
+    await expect(confirmPasswordInput).toHaveAttribute('type', 'password')
+
+    await passwordToggle.click()
+    await expect(passwordInput).toHaveAttribute('type', 'password')
+  })
+
+  test('should toggle confirm password field visibility independently', async ({ page }) => {
+    await page.goto('http://localhost:5173/signup')
+
+    const passwordInput = page.locator('input[name="password"]')
+    const confirmPasswordInput = page.locator('input[name="confirmPassword"]')
+    const confirmPasswordToggle = page.locator('input#confirmPassword ~ button')
+
+    await expect(passwordInput).toHaveAttribute('type', 'password')
+    await expect(confirmPasswordInput).toHaveAttribute('type', 'password')
+
+    await confirmPasswordToggle.click()
+    await expect(confirmPasswordInput).toHaveAttribute('type', 'text')
+    await expect(passwordInput).toHaveAttribute('type', 'password')
+
+    await confirmPasswordToggle.click()
+    await expect(confirmPasswordInput).toHaveAttribute('type', 'password')
+  })
 })
