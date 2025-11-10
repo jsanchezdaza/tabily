@@ -1,5 +1,6 @@
 export const MIN_PASSWORD_LENGTH = 12
-export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+export const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
 export const VALIDATION_MESSAGES = {
   EMAIL_REQUIRED: 'Email is required',

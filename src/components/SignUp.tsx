@@ -28,13 +28,16 @@ function SignUp() {
     e.preventDefault()
     const newErrors: FormErrors = {}
 
-    if (!fullName.trim()) {
+    const trimmedName = fullName.trim()
+    const trimmedEmail = email.trim()
+
+    if (!trimmedName) {
       newErrors.fullName = VALIDATION_MESSAGES.NAME_REQUIRED
     }
 
-    if (!email) {
+    if (!trimmedEmail) {
       newErrors.email = VALIDATION_MESSAGES.EMAIL_REQUIRED
-    } else if (!validateEmail(email)) {
+    } else if (!validateEmail(trimmedEmail)) {
       newErrors.email = VALIDATION_MESSAGES.EMAIL_INVALID
     }
 
@@ -53,14 +56,19 @@ function SignUp() {
     setErrors(newErrors)
 
     if (Object.keys(newErrors).length === 0) {
-      setIsLoading(true)
-      const { error } = await signUpWithEmail(email, password, fullName)
-      setIsLoading(false)
+      try {
+        setIsLoading(true)
+        const { error } = await signUpWithEmail(trimmedEmail, password, trimmedName)
 
-      if (error) {
-        setErrors({ auth: error.message })
-      } else {
-        setSuccess(true)
+        if (error) {
+          setErrors({ auth: error.message })
+        } else {
+          setSuccess(true)
+        }
+      } catch {
+        setErrors({ auth: 'An unexpected error occurred. Please try again.' })
+      } finally {
+        setIsLoading(false)
       }
     }
   }

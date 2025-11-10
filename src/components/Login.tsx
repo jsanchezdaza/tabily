@@ -23,9 +23,11 @@ function Login() {
     e.preventDefault()
     const newErrors: FormErrors = {}
 
-    if (!email) {
+    const trimmedEmail = email.trim()
+
+    if (!trimmedEmail) {
       newErrors.email = VALIDATION_MESSAGES.EMAIL_REQUIRED
-    } else if (!validateEmail(email)) {
+    } else if (!validateEmail(trimmedEmail)) {
       newErrors.email = VALIDATION_MESSAGES.EMAIL_INVALID
     }
 
@@ -38,23 +40,33 @@ function Login() {
     setErrors(newErrors)
 
     if (Object.keys(newErrors).length === 0) {
-      setIsLoading(true)
-      const { error } = await signInWithEmail(email, password)
-      setIsLoading(false)
+      try {
+        setIsLoading(true)
+        const { error } = await signInWithEmail(trimmedEmail, password)
 
-      if (error) {
-        setErrors({ auth: error.message })
+        if (error) {
+          setErrors({ auth: error.message })
+        }
+      } catch {
+        setErrors({ auth: 'An unexpected error occurred. Please try again.' })
+      } finally {
+        setIsLoading(false)
       }
     }
   }
 
   const handleGoogleSignIn = async () => {
-    setIsLoading(true)
-    const { error } = await signInWithGoogle()
-    setIsLoading(false)
+    try {
+      setIsLoading(true)
+      const { error } = await signInWithGoogle()
 
-    if (error) {
-      setErrors({ auth: error.message })
+      if (error) {
+        setErrors({ auth: error.message })
+      }
+    } catch {
+      setErrors({ auth: 'An unexpected error occurred. Please try again.' })
+    } finally {
+      setIsLoading(false)
     }
   }
 

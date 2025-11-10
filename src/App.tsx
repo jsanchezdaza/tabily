@@ -3,19 +3,13 @@ import { useAuth } from './hooks/useAuth'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Home from './components/Home'
+import LoadingSpinner from './components/LoadingSpinner'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    )
+    return <LoadingSpinner />
   }
 
   return user ? <>{children}</> : <Navigate to="/" replace />
@@ -25,14 +19,7 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    )
+    return <LoadingSpinner />
   }
 
   return !user ? <>{children}</> : <Navigate to="/home" replace />
