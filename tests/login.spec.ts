@@ -12,7 +12,7 @@ test.describe('Login Page', () => {
 
   test('displays email and password input fields', async ({ page }) => {
     await expect(page.getByLabel(/email/i)).toBeVisible()
-    await expect(page.getByLabel(/password/i)).toBeVisible()
+    await expect(page.locator('input#password')).toBeVisible()
   })
 
   test('displays sign in button', async ({ page }) => {
@@ -30,7 +30,7 @@ test.describe('Login Page', () => {
 
   test('shows error message when password is too short', async ({ page }) => {
     await page.getByLabel(/email/i).fill('user@example.com')
-    await page.getByLabel(/password/i).fill('123')
+    await page.locator('input#password').fill('123')
     await page.getByRole('button', { name: /sign in/i }).click()
     await expect(page.getByText(/password must be at least 12 characters/i)).toBeVisible()
   })
@@ -38,5 +38,25 @@ test.describe('Login Page', () => {
   test('displays sign up link', async ({ page }) => {
     await expect(page.getByText(/don't have an account/i)).toBeVisible()
     await expect(page.getByRole('link', { name: /sign up/i })).toBeVisible()
+  })
+
+  test('displays password visibility toggle button', async ({ page }) => {
+    await expect(page.getByRole('button', { name: /show password/i })).toBeVisible()
+  })
+
+  test('toggles password visibility when clicking toggle button', async ({ page }) => {
+    const passwordInput = page.locator('input#password')
+    const toggleButton = page.getByRole('button', { name: /show password/i })
+
+    await expect(passwordInput).toHaveAttribute('type', 'password')
+
+    await toggleButton.click()
+    await expect(passwordInput).toHaveAttribute('type', 'text')
+    await expect(page.getByRole('button', { name: /hide password/i })).toBeVisible()
+
+    const hideButton = page.getByRole('button', { name: /hide password/i })
+    await hideButton.click()
+    await expect(passwordInput).toHaveAttribute('type', 'password')
+    await expect(page.getByRole('button', { name: /show password/i })).toBeVisible()
   })
 })
