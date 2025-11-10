@@ -1,7 +1,26 @@
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
 function Header() {
   const { user, signOut } = useAuth()
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isDropdownOpen])
 
   return (
     <header className="bg-gray-900 border-b border-gray-800">
@@ -43,12 +62,35 @@ function Header() {
               </a>
             )}
             {user ? (
-              <button
-                onClick={signOut}
-                className="text-gray-300 hover:text-emerald-300 transition-colors font-medium"
-              >
-                Logout
-              </button>
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  aria-label="Profile menu"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-300 hover:bg-emerald-400 transition-colors"
+                >
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="12" cy="8" r="4" fill="#ff6b6b"/>
+                    <ellipse cx="12" cy="20" rx="9" ry="6" fill="#ff6b6b"/>
+                  </svg>
+                </button>
+
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-1 z-50">
+                    <button
+                      onClick={signOut}
+                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <a
                 href="/"

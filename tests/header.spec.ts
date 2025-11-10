@@ -35,7 +35,11 @@ test.describe('Header', () => {
     await expect(page.locator('header').getByRole('link', { name: /login/i })).toBeVisible()
   })
 
-  test('does not display Logout button when not logged in', async ({ page }) => {
+  test('does not display profile icon when not logged in', async ({ page }) => {
+    await expect(page.locator('header button[aria-label="Profile menu"]')).not.toBeVisible()
+  })
+
+  test('does not display Logout button directly when not logged in', async ({ page }) => {
     await expect(page.locator('header').getByRole('button', { name: /logout/i })).not.toBeVisible()
   })
 
