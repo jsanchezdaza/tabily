@@ -2,15 +2,12 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Sign Up Page', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to the app
     await page.goto('http://localhost:5173')
   })
 
   test('should navigate to signup page from login', async ({ page }) => {
-    // Click the "Sign Up" link on login page
     await page.click('text=Sign Up')
 
-    // Verify we're on the signup page
     await expect(page).toHaveURL(/.*signup/)
     await expect(page.locator('h1')).toContainText('Create Account')
   })
@@ -18,10 +15,8 @@ test.describe('Sign Up Page', () => {
   test('should show validation errors for empty fields', async ({ page }) => {
     await page.goto('http://localhost:5173/signup')
 
-    // Try to submit without filling any fields
     await page.click('button[type="submit"]')
 
-    // Check for validation errors
     await expect(page.locator('text=Name is required')).toBeVisible()
     await expect(page.locator('text=Email is required')).toBeVisible()
     await expect(page.locator('text=Password is required')).toBeVisible()
@@ -67,7 +62,6 @@ test.describe('Sign Up Page', () => {
   })
 
   test('should successfully sign up and show verification message', async ({ page }) => {
-    // Mock the Supabase signup API call
     await page.route('**/auth/v1/signup**', async route => {
       await route.fulfill({
         status: 200,
@@ -85,7 +79,6 @@ test.describe('Sign Up Page', () => {
 
     await page.goto('http://localhost:5173/signup')
 
-    // Generate unique email for this test
     const timestamp = Date.now()
     const email = `test${timestamp}@example.com`
 
@@ -96,7 +89,6 @@ test.describe('Sign Up Page', () => {
 
     await page.click('button[type="submit"]')
 
-    // Should show verification message
     await expect(page.locator('text=Check your email')).toBeVisible()
     await expect(page.locator('text=verification link')).toBeVisible()
   })
@@ -104,14 +96,11 @@ test.describe('Sign Up Page', () => {
   test('should have a link back to login page', async ({ page }) => {
     await page.goto('http://localhost:5173/signup')
 
-    // Check for "Already have an account? Sign in" link
     await expect(page.locator('text=Already have an account?')).toBeVisible()
     await expect(page.locator('text=Sign In')).toBeVisible()
 
-    // Click the sign in link
     await page.click('text=Sign In')
 
-    // Should navigate back to login
     await expect(page).toHaveURL(/.*\/$|.*login/)
   })
 
@@ -123,11 +112,9 @@ test.describe('Sign Up Page', () => {
     await page.fill('input[name="password"]', 'password123')
     await page.fill('input[name="confirmPassword"]', 'password123')
 
-    // Click submit
     const submitButton = page.locator('button[type="submit"]')
     await submitButton.click()
 
-    // Button should be disabled during submission
     await expect(submitButton).toBeDisabled()
   })
 })

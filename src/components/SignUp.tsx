@@ -2,6 +2,9 @@ import { useState, FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import Header from './Header'
+import Footer from './Footer'
+import { MIN_PASSWORD_LENGTH, VALIDATION_MESSAGES } from '../constants/validation'
+import { validateEmail } from '../utils/validation'
 
 interface FormErrors {
   fullName?: string
@@ -21,35 +24,30 @@ function SignUp() {
   const [success, setSuccess] = useState(false)
   const { signUpWithEmail } = useAuth()
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const newErrors: FormErrors = {}
 
     if (!fullName.trim()) {
-      newErrors.fullName = 'Name is required'
+      newErrors.fullName = VALIDATION_MESSAGES.NAME_REQUIRED
     }
 
     if (!email) {
-      newErrors.email = 'Email is required'
+      newErrors.email = VALIDATION_MESSAGES.EMAIL_REQUIRED
     } else if (!validateEmail(email)) {
-      newErrors.email = 'Invalid email address'
+      newErrors.email = VALIDATION_MESSAGES.EMAIL_INVALID
     }
 
     if (!password) {
-      newErrors.password = 'Password is required'
-    } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters'
+      newErrors.password = VALIDATION_MESSAGES.PASSWORD_REQUIRED
+    } else if (password.length < MIN_PASSWORD_LENGTH) {
+      newErrors.password = VALIDATION_MESSAGES.PASSWORD_TOO_SHORT
     }
 
     if (!confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password'
+      newErrors.confirmPassword = VALIDATION_MESSAGES.CONFIRM_PASSWORD_REQUIRED
     } else if (password !== confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match'
+      newErrors.confirmPassword = VALIDATION_MESSAGES.PASSWORDS_DO_NOT_MATCH
     }
 
     setErrors(newErrors)
@@ -104,9 +102,7 @@ function SignUp() {
               </div>
             </div>
 
-            <footer className="mt-8 text-center text-sm text-gray-500">
-              © {new Date().getFullYear()} tabily. All rights reserved.
-            </footer>
+            <Footer />
           </div>
         </div>
       </>
@@ -217,9 +213,7 @@ function SignUp() {
             </div>
           </div>
 
-          <footer className="mt-8 text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} tabily. All rights reserved.
-          </footer>
+          <Footer />
         </div>
       </div>
     </>
