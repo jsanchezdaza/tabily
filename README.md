@@ -18,6 +18,7 @@ An AI-powered trip planning application built with React, TypeScript, Tailwind C
 ## Setup
 
 1. **Install dependencies**
+
    ```bash
    pnpm install
    ```
@@ -25,11 +26,13 @@ An AI-powered trip planning application built with React, TypeScript, Tailwind C
 2. **Configure Supabase**
 
    Copy `.env.example` to `.env`:
+
    ```bash
    cp .env.example .env
    ```
 
    Update `.env` with your Supabase credentials:
+
    ```
    VITE_SUPABASE_URL=your_supabase_project_url
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -46,6 +49,7 @@ An AI-powered trip planning application built with React, TypeScript, Tailwind C
 ## Development
 
 Start the development server:
+
 ```bash
 pnpm dev
 ```
@@ -55,11 +59,13 @@ The app will be available at `http://localhost:5173`
 ## Testing
 
 Run acceptance tests:
+
 ```bash
 pnpm test
 ```
 
 Run tests with UI:
+
 ```bash
 pnpm test:ui
 ```
@@ -67,11 +73,13 @@ pnpm test:ui
 ## Build
 
 Build for production:
+
 ```bash
 pnpm build
 ```
 
 Preview production build:
+
 ```bash
 pnpm preview
 ```
@@ -88,6 +96,7 @@ pnpm preview
 ## Development Approach
 
 This project follows:
+
 - **TDD (Test-Driven Development)** - Tests written before implementation
 - **Lean & XP Principles** - YAGNI, simplicity, small iterations
 - **Acceptance Testing** - Using Playwright for end-to-end tests

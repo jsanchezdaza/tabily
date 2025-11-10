@@ -1,0 +1,7 @@
+dist
+node_modules
+.vercel
+playwright-report
+test-results
+pnpm-lock.yaml
+package-lock.json

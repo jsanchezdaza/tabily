@@ -20,7 +20,7 @@ test.describe('Header', () => {
 
   test('header has dark background', async ({ page }) => {
     const header = page.locator('header')
-    const bgColor = await header.evaluate((el) => {
+    const bgColor = await header.evaluate(el => {
       return window.getComputedStyle(el).backgroundColor
     })
     // Should be a dark color (gray-900 or similar)

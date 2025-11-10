@@ -34,10 +34,10 @@ function Header() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect x="15" y="15" width="4" height="30" rx="2" fill="#a8e6cf"/>
-              <rect x="41" y="15" width="4" height="30" rx="2" fill="#a8e6cf"/>
-              <rect x="10" y="15" width="40" height="5" rx="2.5" fill="#a8e6cf"/>
-              <rect x="12" y="25" width="36" height="4" rx="2" fill="#ff6b6b"/>
+              <rect x="15" y="15" width="4" height="30" rx="2" fill="#a8e6cf" />
+              <rect x="41" y="15" width="4" height="30" rx="2" fill="#a8e6cf" />
+              <rect x="10" y="15" width="40" height="5" rx="2.5" fill="#a8e6cf" />
+              <rect x="12" y="25" width="36" height="4" rx="2" fill="#ff6b6b" />
               <path
                 d="M30 45C30 45 30 35 30 30C30 25 30 20 30 20"
                 stroke="#c8f7dc"
@@ -45,11 +45,9 @@ function Header() {
                 strokeLinecap="round"
                 strokeDasharray="2 3"
               />
-              <circle cx="30" cy="45" r="2.5" fill="#ff6b6b"/>
+              <circle cx="30" cy="45" r="2.5" fill="#ff6b6b" />
             </svg>
-            <span className="text-2xl font-bold text-emerald-300 tracking-tight">
-              tabily
-            </span>
+            <span className="text-2xl font-bold text-emerald-300 tracking-tight">tabily</span>
           </div>
 
           <nav className="flex items-center gap-6">
@@ -75,8 +73,8 @@ function Header() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <circle cx="12" cy="8" r="4" fill="#ff6b6b"/>
-                    <ellipse cx="12" cy="20" rx="9" ry="6" fill="#ff6b6b"/>
+                    <circle cx="12" cy="8" r="4" fill="#ff6b6b" />
+                    <ellipse cx="12" cy="20" rx="9" ry="6" fill="#ff6b6b" />
                   </svg>
                 </button>
 

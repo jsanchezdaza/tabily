@@ -7,17 +7,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Package Manager
 
 **ALWAYS use pnpm** - Never use npm or yarn
+
 - Commands: `pnpm install`, `pnpm dev`, `pnpm build`
 - Lock file: `pnpm-lock.yaml`
 
 ## Git Commit Guidelines
 
 **NO CO-AUTHOR references** - Never add "Co-authored-by: Claude" or similar
+
 - NO AI references in commit messages
 - Write commits as if made by a human developer
 - Use conventional commits: `feat:`, `fix:`, `chore:`, `docs:`
 
 ### Examples:
+
 ✅ `feat: add new feature`
 ✅ `fix: resolve bug in component`
 ✅ `chore: update dependencies`
@@ -35,6 +38,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - Green: Write minimal code to pass
   - Refactor: Clean up while keeping tests green
 - **User stories first** - Always think from the user's perspective
+
+## Linting and Formatting (MANDATORY)
+
+**ALWAYS run linting before committing:**
+
+- Run `pnpm lint` to check for linting and formatting issues
+- Run `pnpm lint:fix` to automatically fix issues
+- Never commit code with linting errors
+- Prettier enforces consistent code formatting
+
+### Available Commands:
+
+- `pnpm lint` - Check for lint and format issues
+- `pnpm lint:fix` - Auto-fix lint and format issues
+- `pnpm format` - Format code with Prettier
 
 ## Pre-Commit Refactor Check (MANDATORY)
 
@@ -67,6 +85,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Pre-Commit File Review (MANDATORY)
 
 **ALWAYS show all modified files before committing to git:**
+
 - Use `git status` and `git diff` to show exactly what will be committed
 - Display the changes clearly so the user can review them
 - Only proceed with the commit after showing the file changes
