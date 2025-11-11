@@ -11,8 +11,10 @@ const createMockUser = (fullName?: string) => ({
   id: 'test-user-123',
   email: 'john.doe@example.com',
   user_metadata: fullName ? { full_name: fullName } : {},
+  app_metadata: {},
   aud: 'authenticated',
   created_at: new Date().toISOString(),
+  role: 'authenticated',
 })
 
 const mockAuthHook = (user: ReturnType<typeof createMockUser>) => {
