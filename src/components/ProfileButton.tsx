@@ -16,7 +16,7 @@ const ProfileButton = memo(function ProfileButton({ user, onClick }: ProfileButt
     <button
       onClick={onClick}
       aria-label="Profile menu"
-      className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-300 hover:bg-emerald-400 transition-colors overflow-hidden relative cursor-pointer"
+      className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-300 hover:bg-emerald-400 transition-colors overflow-hidden relative"
     >
       <UserIcon />
       {avatarUrl && !imageError && (
