@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import Logo from './icons/Logo'
 import LogoutIcon from './icons/LogoutIcon'
@@ -33,19 +34,19 @@ function Header() {
     <header className="bg-gray-900 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <Logo />
             <span className="text-2xl font-bold text-emerald-300 tracking-tight">tabily</span>
-          </div>
+          </Link>
 
           <nav className="flex items-center gap-6">
             {user && (
-              <a
-                href="/trips"
+              <Link
+                to="/trips"
                 className="text-gray-300 hover:text-emerald-300 transition-colors font-medium"
               >
                 My trips
-              </a>
+              </Link>
             )}
             {user ? (
               <div className="relative" ref={dropdownRef}>
@@ -77,12 +78,12 @@ function Header() {
                 )}
               </div>
             ) : (
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="border-2 border-emerald-300 text-emerald-300 px-5 py-1.5 rounded-full font-medium transition-all hover:bg-emerald-300/10"
               >
                 Sign In
-              </a>
+              </Link>
             )}
           </nav>
         </div>
