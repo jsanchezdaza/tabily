@@ -79,7 +79,7 @@ function Header() {
             ) : (
               <a
                 href="/"
-                className="bg-emerald-300 hover:bg-emerald-400 text-gray-900 px-6 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg"
+                className="border-2 border-emerald-300 text-emerald-300 px-5 py-1.5 rounded-full font-medium transition-all hover:bg-emerald-300/10"
               >
                 Sign In
               </a>
