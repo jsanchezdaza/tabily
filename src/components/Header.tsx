@@ -79,13 +79,39 @@ function Header() {
                 </button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-1 z-50">
-                    <button
-                      onClick={signOut}
-                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
-                    >
-                      Logout
-                    </button>
+                  <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-fadeIn">
+                    {user?.user_metadata?.full_name && (
+                      <div className="px-4 py-3 bg-gradient-to-br from-emerald-50 to-blue-50 border-b border-gray-100">
+                        <p className="text-sm text-gray-500 mb-1">Welcome back!</p>
+                        <p className="text-base font-semibold text-gray-900 truncate">
+                          {user.user_metadata.full_name}
+                        </p>
+                        {user.email && (
+                          <p className="text-xs text-gray-500 mt-1 truncate">{user.email}</p>
+                        )}
+                      </div>
+                    )}
+                    <div className="py-1">
+                      <button
+                        onClick={signOut}
+                        className="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all duration-150 flex items-center gap-3 group"
+                      >
+                        <svg
+                          className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                          />
+                        </svg>
+                        <span className="font-medium">Logout</span>
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>

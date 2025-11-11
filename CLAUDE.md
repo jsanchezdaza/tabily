@@ -63,6 +63,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - Can any new components/functions be simplified or extracted?
    - Are there magic numbers or hardcoded strings that should be constants?
    - Is the code following existing patterns and conventions?
+   - **Remove ALL unnecessary comments** - Code should be self-documenting
+     - ❌ Remove comments that just restate what the code does
+     - ❌ Remove outdated or misleading comments
+     - ✅ Keep comments only when they explain WHY, not WHAT
+     - ✅ Keep comments for complex business logic or non-obvious behavior
 
 2. **Performance & Maintainability**
    - Are there unnecessary re-renders or expensive operations?
