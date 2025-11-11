@@ -5,12 +5,28 @@ import { BrowserRouter } from 'react-router-dom'
 import Header from '../Header'
 import * as useAuthModule from '../../hooks/useAuth'
 
+vi.mock('../../lib/supabase', () => ({
+  supabase: {
+    auth: {
+      getSession: vi.fn(),
+      onAuthStateChange: vi.fn(),
+      signInWithPassword: vi.fn(),
+      signInWithOAuth: vi.fn(),
+      signUp: vi.fn(),
+      signOut: vi.fn(),
+    },
+  },
+}))
+
 vi.mock('../../hooks/useAuth')
 
-const createMockUser = (fullName?: string) => ({
+const createMockUser = (fullName?: string, avatarUrl?: string) => ({
   id: 'test-user-123',
   email: 'john.doe@example.com',
-  user_metadata: fullName ? { full_name: fullName } : {},
+  user_metadata: {
+    ...(fullName ? { full_name: fullName } : {}),
+    ...(avatarUrl ? { avatar_url: avatarUrl } : {}),
+  },
   app_metadata: {},
   aud: 'authenticated',
   created_at: new Date().toISOString(),
@@ -61,5 +77,45 @@ describe('Header', () => {
     await openProfileMenu()
 
     expect(screen.queryByText(/Welcome back!/i)).not.toBeInTheDocument()
+  })
+
+  it('displays user profile picture when avatar_url is available', () => {
+    const avatarUrl = 'https://example.com/avatar.jpg'
+    const mockUser = createMockUser('John Doe', avatarUrl)
+    mockAuthHook(mockUser)
+    renderHeader()
+
+    const profileButton = screen.getByRole('button', { name: /profile menu/i })
+    const profileImage = profileButton.querySelector('img')
+
+    expect(profileImage).toBeInTheDocument()
+    expect(profileImage).toHaveAttribute('src', avatarUrl)
+    expect(profileImage).toHaveAttribute('alt', "John Doe's profile picture")
+  })
+
+  it('displays default UserIcon when avatar_url is not available', () => {
+    const mockUser = createMockUser('John Doe')
+    mockAuthHook(mockUser)
+    renderHeader()
+
+    const profileButton = screen.getByRole('button', { name: /profile menu/i })
+    const profileImage = profileButton.querySelector('img')
+    const userIcon = profileButton.querySelector('svg')
+
+    expect(profileImage).not.toBeInTheDocument()
+    expect(userIcon).toBeInTheDocument()
+  })
+
+  it('displays default UserIcon when user has no full_name and no avatar_url', () => {
+    const mockUser = createMockUser()
+    mockAuthHook(mockUser)
+    renderHeader()
+
+    const profileButton = screen.getByRole('button', { name: /profile menu/i })
+    const profileImage = profileButton.querySelector('img')
+    const userIcon = profileButton.querySelector('svg')
+
+    expect(profileImage).not.toBeInTheDocument()
+    expect(userIcon).toBeInTheDocument()
   })
 })
