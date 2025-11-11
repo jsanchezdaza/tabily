@@ -18,6 +18,12 @@ test.describe('Header', () => {
     await expect(page.locator('header').getByText('tabily')).toBeVisible()
   })
 
+  test('tabily text is a link to home page', async ({ page }) => {
+    const tabilyLink = page.locator('header a').filter({ hasText: 'tabily' })
+    await expect(tabilyLink).toBeVisible()
+    await expect(tabilyLink).toHaveAttribute('href', '/')
+  })
+
   test('header has dark background', async ({ page }) => {
     const header = page.locator('header')
     const bgColor = await header.evaluate(el => {
