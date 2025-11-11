@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../hooks/useAuth'
+import Logo from './icons/Logo'
+import UserIcon from './icons/UserIcon'
+import LogoutIcon from './icons/LogoutIcon'
 
 function Header() {
   const { user, signOut } = useAuth()
@@ -27,26 +30,7 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="15" y="15" width="4" height="30" rx="2" fill="#a8e6cf" />
-              <rect x="41" y="15" width="4" height="30" rx="2" fill="#a8e6cf" />
-              <rect x="10" y="15" width="40" height="5" rx="2.5" fill="#a8e6cf" />
-              <rect x="12" y="25" width="36" height="4" rx="2" fill="#ff6b6b" />
-              <path
-                d="M30 45C30 45 30 35 30 30C30 25 30 20 30 20"
-                stroke="#c8f7dc"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray="2 3"
-              />
-              <circle cx="30" cy="45" r="2.5" fill="#ff6b6b" />
-            </svg>
+            <Logo />
             <span className="text-2xl font-bold text-emerald-300 tracking-tight">tabily</span>
           </div>
 
@@ -66,16 +50,7 @@ function Header() {
                   aria-label="Profile menu"
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-300 hover:bg-emerald-400 transition-colors"
                 >
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="12" cy="8" r="4" fill="#ff6b6b" />
-                    <ellipse cx="12" cy="20" rx="9" ry="6" fill="#ff6b6b" />
-                  </svg>
+                  <UserIcon />
                 </button>
 
                 {isDropdownOpen && (
@@ -96,19 +71,7 @@ function Header() {
                         onClick={signOut}
                         className="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all duration-150 flex items-center gap-3 group"
                       >
-                        <svg
-                          className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                          />
-                        </svg>
+                        <LogoutIcon className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" />
                         <span className="font-medium">Logout</span>
                       </button>
                     </div>
