@@ -105,7 +105,7 @@ function SignUp() {
                   your inbox and click the link to verify your account.
                 </p>
                 <Link
-                  to="/"
+                  to="/login"
                   className="inline-block w-full bg-emerald-300 text-gray-900 py-3 rounded-lg font-medium hover:bg-emerald-400 transition duration-200 shadow-md hover:shadow-lg"
                 >
                   Back to Sign In
@@ -208,7 +208,7 @@ function SignUp() {
 
             <div className="mt-6 text-center text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/" className="text-emerald-600 font-medium hover:text-emerald-700">
+              <Link to="/login" className="text-emerald-600 font-medium hover:text-emerald-700">
                 Sign In
               </Link>
             </div>

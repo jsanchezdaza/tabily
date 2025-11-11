@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Sign Up Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173')
+    await page.goto('http://localhost:5173/login')
   })
 
   test('should navigate to signup page from login', async ({ page }) => {
@@ -101,11 +101,14 @@ test.describe('Sign Up Page', () => {
     await page.goto('http://localhost:5173/signup')
 
     await expect(page.locator('text=Already have an account?')).toBeVisible()
-    await expect(page.locator('text=Sign In')).toBeVisible()
+    await expect(page.getByRole('link', { name: /sign in/i }).last()).toBeVisible()
 
-    await page.click('text=Sign In')
+    await page
+      .getByRole('link', { name: /sign in/i })
+      .last()
+      .click()
 
-    await expect(page).toHaveURL(/.*\/$|.*login/)
+    await expect(page).toHaveURL(/.*login/)
   })
 
   test('should disable submit button while loading', async ({ page }) => {

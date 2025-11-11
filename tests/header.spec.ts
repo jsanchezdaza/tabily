@@ -32,7 +32,7 @@ test.describe('Header', () => {
   })
 
   test('displays Login link when not logged in', async ({ page }) => {
-    await expect(page.locator('header').getByRole('link', { name: /login/i })).toBeVisible()
+    await expect(page.locator('header').getByRole('link', { name: /sign in/i })).toBeVisible()
   })
 
   test('does not display profile icon when not logged in', async ({ page }) => {

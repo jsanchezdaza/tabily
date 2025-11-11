@@ -78,7 +78,7 @@ function Header() {
               </div>
             ) : (
               <a
-                href="/"
+                href="/login"
                 className="border-2 border-emerald-300 text-emerald-300 px-5 py-1.5 rounded-full font-medium transition-all hover:bg-emerald-300/10"
               >
                 Sign In
