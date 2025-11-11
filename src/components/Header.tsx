@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import Logo from './icons/Logo'
-import UserIcon from './icons/UserIcon'
 import LogoutIcon from './icons/LogoutIcon'
+import ProfileButton from './ProfileButton'
 
 function Header() {
   const { user, signOut } = useAuth()
@@ -45,13 +45,7 @@ function Header() {
             )}
             {user ? (
               <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  aria-label="Profile menu"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-300 hover:bg-emerald-400 transition-colors"
-                >
-                  <UserIcon />
-                </button>
+                <ProfileButton user={user} onClick={() => setIsDropdownOpen(!isDropdownOpen)} />
 
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-fadeIn">
