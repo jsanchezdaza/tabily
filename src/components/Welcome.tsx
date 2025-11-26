@@ -10,7 +10,7 @@ function Welcome() {
     <>
       <Header />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col overflow-x-hidden">
-        <div className="flex-1 flex items-center justify-center p-4 lg:p-0">
+        <div className="flex-1 flex items-center justify-center lg:p-0">
           <div className="w-full lg:flex lg:items-center py-12 lg:py-20 lg:max-w-none">
             <div className="order-2 lg:order-1 lg:flex-1 lg:max-w-3xl px-4 lg:pl-8 lg:pr-8 xl:pl-20 text-center lg:text-left">
               <div className="inline-block mb-4 px-4 py-2 bg-emerald-100 rounded-full">
@@ -32,13 +32,13 @@ function Welcome() {
               </div>
             </div>
 
-            <div className="order-1 lg:order-2 lg:flex-1 flex justify-center items-center px-4 lg:px-0 lg:pr-0">
+            <div className="order-1 lg:order-2 lg:flex-1 flex justify-center items-center lg:px-0 lg:pr-0">
               <div className="relative w-full max-w-2xl lg:max-w-none">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-200 to-blue-200 rounded-3xl lg:rounded-l-3xl lg:rounded-r-none blur-3xl opacity-30 animate-pulse"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-200 to-blue-200 rounded-none lg:rounded-l-3xl lg:rounded-r-none blur-3xl opacity-30 animate-pulse"></div>
                 <img
                   src="/tabily-home.png"
                   alt="World landmarks illustration"
-                  className="relative w-full h-auto max-h-[350px] lg:max-h-[400px] object-cover drop-shadow-2xl rounded-2xl lg:rounded-l-2xl lg:rounded-r-none"
+                  className="relative w-full h-auto max-h-[350px] lg:max-h-[400px] object-cover drop-shadow-2xl rounded-none lg:rounded-l-2xl lg:rounded-r-none"
                 />
               </div>
             </div>
