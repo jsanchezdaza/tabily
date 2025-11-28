@@ -215,6 +215,7 @@ Before ANY commit:
 - **Focus on What and Why**: Describe what changed and why, not who or what tool wrote it.
 
 ❌ **NEVER**:
+
 ```
 fix: Update color
 
@@ -223,6 +224,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 ✅ **ALWAYS**:
+
 ```
 fix: Standardize tabily logo color to emerald-500
 
