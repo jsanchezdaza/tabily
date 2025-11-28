@@ -80,7 +80,7 @@ function SignUp() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-white lg:bg-gradient-to-br lg:from-blue-50 lg:via-white lg:to-purple-50 flex items-center justify-center p-4">
           <div className="w-full max-w-md">
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <div className="text-center">
@@ -132,7 +132,7 @@ function SignUp() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-white lg:bg-gradient-to-br lg:from-blue-50 lg:via-white lg:to-purple-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="text-center mb-8">
