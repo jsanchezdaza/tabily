@@ -14,7 +14,7 @@
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write .",
     "format": "prettier --write .",
-    "validate": "pnpm run lint && pnpm run build && pnpm run test:unit"
+    "validate": "pnpm run lint && pnpm run build && pnpm run test:unit --run"
   },
   "keywords": [],
   "author": "",
