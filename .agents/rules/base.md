@@ -207,7 +207,32 @@ Before ANY commit:
 ❌ **NEVER**: Commit → discover errors → fix commit
 ✅ **ALWAYS**: Validate → fix all errors → commit once
 
-## 13. Quick Reference for All AI Agents
+## 13. Git Commit Message Standards
+
+- **No AI References**: Never include AI-generated footers, mentions, or co-authorship attributions in commit messages.
+- **Professional Format**: Commit messages should be clear, concise, and professional.
+- **Conventional Commits**: Use conventional commit format (e.g., `fix:`, `feat:`, `docs:`, `test:`, `refactor:`).
+- **Focus on What and Why**: Describe what changed and why, not who or what tool wrote it.
+
+❌ **NEVER**:
+
+```
+fix: Update color
+
+🤖 Generated with Claude Code
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+✅ **ALWAYS**:
+
+```
+fix: Standardize tabily logo color to emerald-500
+
+The Header component was using text-emerald-300 while the Welcome page
+correctly uses text-emerald-500. This fixes the visual inconsistency.
+```
+
+## 14. Quick Reference for All AI Agents
 
 When working on this project:
 
@@ -219,8 +244,9 @@ When working on this project:
 6. **Show your thinking process** - be conversational and progressive 💭
 7. **Question everything** - assumptions, requirements, design choices ❓
 8. **Run `pnpm run validate` before EVERY commit** - zero tolerance ✅
-9. **Run tests automatically** after every change 🧪
-10. **Focus on simplicity** over cleverness ✨
-11. **Ask for clarification** when in doubt 🤔
+9. **Clean commit messages** - no AI references or co-authorship 📝
+10. **Run tests automatically** after every change 🧪
+11. **Focus on simplicity** over cleverness ✨
+12. **Ask for clarification** when in doubt 🤔
 
 Remember: This is a high-quality, test-driven, incremental development environment. Quality over speed, clarity over cleverness, baby steps over big leaps.

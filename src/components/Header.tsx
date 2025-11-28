@@ -36,7 +36,7 @@ function Header() {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3">
             <Logo />
-            <span className="text-2xl font-bold text-emerald-300 tracking-tight">tabily</span>
+            <span className="text-2xl font-bold text-emerald-500 tracking-tight">tabily</span>
           </Link>
 
           <nav className="flex items-center gap-6">

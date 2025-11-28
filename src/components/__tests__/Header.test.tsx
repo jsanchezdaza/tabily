@@ -139,4 +139,13 @@ describe('Header', () => {
     expect(signInLink).toHaveClass('py-1.5')
     expect(signInLink).toHaveClass('rounded-full')
   })
+
+  it('displays tabily text with emerald-500 color', () => {
+    const mockUser = createMockUser()
+    mockAuthHook(mockUser)
+    renderHeader()
+
+    const tabilyText = screen.getByText('tabily')
+    expect(tabilyText).toHaveClass('text-emerald-500')
+  })
 })
