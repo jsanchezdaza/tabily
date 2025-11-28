@@ -9,7 +9,7 @@ function Welcome() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col overflow-x-hidden">
+      <div className="min-h-screen bg-white lg:bg-gradient-to-br lg:from-blue-50 lg:via-white lg:to-purple-50 flex flex-col overflow-x-hidden">
         <div className="flex-1 flex items-center justify-center lg:p-0">
           <div className="w-full lg:flex lg:items-center py-12 lg:py-20 lg:max-w-none">
             <div className="order-2 lg:order-1 lg:flex-1 lg:max-w-3xl px-4 lg:pl-8 lg:pr-8 xl:pl-20 text-center lg:text-left">
