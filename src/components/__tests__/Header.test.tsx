@@ -148,4 +148,14 @@ describe('Header', () => {
     const tabilyText = screen.getByText('tabily')
     expect(tabilyText).toHaveClass('text-emerald-500')
   })
+
+  it('has opaque background color on all screen sizes', () => {
+    const mockUser = createMockUser()
+    mockAuthHook(mockUser)
+    renderHeader()
+
+    const header = screen.getByRole('banner')
+    expect(header).toHaveClass('bg-gray-900')
+    expect(header).not.toHaveClass('lg:bg-gray-900')
+  })
 })
