@@ -23,9 +23,9 @@ This document contains all development rules and guidelines for this project, ap
 - **Quality Requirements**: The project has strict requirements for code quality and maintainability.
 - **High Coverage**: All code must have very high test coverage; strive for 100% where practical.
 - **Pre-commit Checks**: All code must pass the following before any commit:
-    - `pnpm run type-check`
-    - `pnpm run format:check`
-    - `pnpm run lint`
+  - `pnpm run type-check`
+  - `pnpm run format:check`
+  - `pnpm run lint`
 - **TDD Workflow**: Test-Driven Development (TDD) is the default workflow: always write tests first.
 - **Component-Based Design**: Use Component-Based Design and Functional Programming for all UI and logic.
 
@@ -83,24 +83,28 @@ This document contains all development rules and guidelines for this project, ap
 ## 9. Development Best Practices
 
 ### Error Handling & Debugging
+
 - **Graceful Error Handling**: Always implement proper error handling with meaningful error messages (e.g., Error Boundaries in React).
 - **Debugging First**: When encountering issues, use debugging tools and logging before asking for help.
 - **Error Context**: Provide sufficient context in error messages to enable quick problem resolution.
 - **Fail Fast**: Design code to fail fast and fail clearly when errors occur.
 
 ### Code Review & Collaboration
+
 - **Pair Programming**: Prefer pairing sessions for complex features and knowledge sharing.
 - **Small Pull Requests**: Keep changes small and focused for easier review and faster integration.
 - **Code Review Standards**: All code must be reviewed before merging, following project quality standards.
 - **Knowledge Sharing**: Document decisions and share context with team members.
 
 ### Security Considerations
+
 - **Security by Design**: Consider security implications in all design decisions.
 - **Input Validation**: Always validate and sanitize user inputs and external data (e.g., Zod).
 - **Secrets Management**: Never hardcode secrets; use proper secret management systems (.env).
 - **Dependency Security**: Regularly update dependencies and monitor for security vulnerabilities.
 
 ### Testing Strategy Distinction
+
 - **Unit Tests**: Fast, isolated tests for individual components and hooks (majority of test suite).
 - **Integration Tests**: Test interactions between components and external systems (limited, focused).
 - **E2E Tests**: Full system validation (minimal, critical user paths only).
@@ -109,11 +113,13 @@ This document contains all development rules and guidelines for this project, ap
 ## 10. Test-Driven Development Rules
 
 ### TDD Approach
+
 - **Failing Test First**: Always start with a failing test before implementing new functionality.
 - **Single Test**: Write only one test at a time; never create more than one test per change.
 - **Complete Coverage**: Ensure every new feature or bugfix is covered by a test.
 
 ### Test Structure & Style
+
 - **Test Runner**: Use Vitest as the test runner.
 - **Assertion Library**: Use standard `expect` assertions.
 - **Mocking**: Use `vi` (Vitest) for mocking and spying.
@@ -125,6 +131,7 @@ This document contains all development rules and guidelines for this project, ap
 - **Strategic Mocking Rule**: Mock external dependencies and modules using `vi.mock`. Keep internal logic testing focused on the component/hook under test.
 
 ### Test Simplicity & Maintainability
+
 - **Simplest Setup**: Prefer the simplest test setup that covers the requirement.
 - **Refactor Tests**: Refactor tests to remove duplication and improve readability.
 - **Consistent Assertions**: Use one assertion style consistently throughout the suite.
@@ -132,6 +139,7 @@ This document contains all development rules and guidelines for this project, ap
 - **Readable Tests**: Always keep tests readable and easy to modify.
 
 ### Test Process & Output
+
 - **Single Test Display**: Only show one test at a time; never present multiple tests in a single step.
 - **Single File Display**: Never show more than one file at a time.
 - **Self-Contained Tests**: Each test should be self-contained and not depend on the order of execution.
@@ -140,20 +148,24 @@ This document contains all development rules and guidelines for this project, ap
 - **Automatic Test Running**: After every code or test change, always run the relevant tests using the appropriate pnpm script. Do not ask for permission to run tests—just do it.
 
 ### Test Naming & Coverage
+
 - **Descriptive Names**: Test function names should clearly describe the scenario and expected outcome.
 - **Purpose-Driven Variables**: Use descriptive variable names that reflect their purpose in the test.
 - **Incremental Coverage**: Ensure all code paths and edge cases are eventually covered by tests, but add them incrementally.
 
 ### Test Review & Refactoring
+
 - **Post-Pass Review**: After a test passes, review for opportunities to simplify or clarify.
 - **Helper Refactoring**: Refactor test helpers and fixtures as needed to keep the suite DRY and maintainable.
 
 ## 11. NPM Scripts Usage
 
 ### Core Rule
+
 **NEVER** call tools like `vitest`, `eslint`, `tsc`, or similar directly. Always use the corresponding `pnpm` script.
 
 ### Available Scripts (Standard)
+
 - `pnpm run dev` — Starts the development server.
 - `pnpm run build` — Builds the app for production.
 - `pnpm run preview` — Locally preview the production build.
@@ -166,6 +178,7 @@ This document contains all development rules and guidelines for this project, ap
 - `pnpm run validate` — Runs tests, linting, and type checking (test, lint, type-check).
 
 ### Usage Rules
+
 1. **Testing**: When running tests, use `pnpm run test` or `pnpm run test:e2e` as appropriate.
 2. **Formatting**: For formatting, use `pnpm run format` or `pnpm run format:check`.
 3. **Type Checking**: For type checking, use `pnpm run type-check`.
@@ -174,6 +187,7 @@ This document contains all development rules and guidelines for this project, ap
 6. **New Operations**: If a new operation is needed, prefer adding a new script in `package.json` rather than running a tool directly.
 
 ### Good vs Bad Examples
+
 ```sh
 # Good: Use pnpm script for unit tests
 pnpm run test
@@ -185,6 +199,7 @@ vitest
 ## 12. Pre-Commit Validation (MANDATORY)
 
 Before ANY commit:
+
 1. Run `pnpm run validate`
 2. If errors exist: fix them and re-run
 3. Only commit when `pnpm run validate` passes with ZERO errors
