@@ -4,6 +4,8 @@ import Welcome from './components/Welcome'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Home from './components/Home'
+import TripPlanner from './components/TripPlanner'
+import TripDetails from './components/TripDetails'
 import LoadingSpinner from './components/LoadingSpinner'
 
 function App() {
@@ -20,6 +22,14 @@ function App() {
         <Route path="/login" element={user ? <Navigate to="/home" replace /> : <Login />} />
         <Route path="/signup" element={user ? <Navigate to="/home" replace /> : <SignUp />} />
         <Route path="/home" element={!user ? <Navigate to="/login" replace /> : <Home />} />
+        <Route
+          path="/plan-trip"
+          element={!user ? <Navigate to="/login" replace /> : <TripPlanner />}
+        />
+        <Route
+          path="/trip/:tripId"
+          element={!user ? <Navigate to="/login" replace /> : <TripDetails />}
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
