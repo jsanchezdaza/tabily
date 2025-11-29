@@ -125,14 +125,15 @@ function Login() {
                 </div>
               </div>
 
-              <button
+              <Button
+                variant="google"
                 onClick={handleGoogleSignIn}
                 disabled={isLoading}
-                className="mt-4 w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition duration-200 flex items-center justify-center gap-3 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-4 w-full flex items-center justify-center gap-3"
               >
                 <GoogleIcon />
                 Continue with Google
-              </button>
+              </Button>
             </div>
 
             <div className="mt-6 text-center text-sm text-gray-600">

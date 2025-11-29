@@ -49,4 +49,20 @@ describe('useClickOutside', () => {
 
     expect(handler).not.toHaveBeenCalled()
   })
+
+  it('cleans up event listener on unmount', () => {
+    const handler = vi.fn()
+    const removeEventListenerSpy = vi.spyOn(document, 'removeEventListener')
+
+    const { unmount } = renderHook(() => {
+      const ref = useRef<HTMLDivElement | null>(null)
+      useClickOutside(ref, handler)
+      return ref
+    })
+
+    unmount()
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith('mousedown', expect.any(Function))
+    removeEventListenerSpy.mockRestore()
+  })
 })

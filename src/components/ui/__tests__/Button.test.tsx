@@ -64,4 +64,14 @@ describe('Button', () => {
 
     expect(button).toHaveClass('w-full')
   })
+
+  it('renders google variant with correct styling', () => {
+    render(<Button variant="google">Sign in with Google</Button>)
+
+    const button = screen.getByRole('button', { name: /sign in with google/i })
+
+    expect(button).toHaveClass('bg-white')
+    expect(button).toHaveClass('border')
+    expect(button).toHaveClass('border-gray-300')
+  })
 })
