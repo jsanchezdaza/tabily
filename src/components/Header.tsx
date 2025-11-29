@@ -15,7 +15,7 @@ function Header() {
     setIsDropdownOpen(prev => !prev)
   }, [])
 
-  useClickOutside(dropdownRef, () => setIsDropdownOpen(false))
+  useClickOutside(dropdownRef, () => setIsDropdownOpen(false), isDropdownOpen)
 
   return (
     <header className="sticky top-0 z-50 bg-gray-900 border-b border-gray-200">

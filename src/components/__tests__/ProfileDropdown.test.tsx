@@ -42,7 +42,7 @@ describe('ProfileDropdown', () => {
 
     render(<ProfileDropdown user={user} onSignOut={onSignOut} />)
 
-    const logoutButton = screen.getByRole('button', { name: /logout/i })
+    const logoutButton = screen.getByRole('button', { name: /sign out/i })
     await userEvent.click(logoutButton)
 
     expect(onSignOut).toHaveBeenCalledTimes(1)

@@ -65,4 +65,28 @@ describe('useClickOutside', () => {
     expect(removeEventListenerSpy).toHaveBeenCalledWith('mousedown', expect.any(Function))
     removeEventListenerSpy.mockRestore()
   })
+
+  it('does not call handler when disabled', () => {
+    const handler = vi.fn()
+    const { result } = renderHook(() => {
+      const ref = useRef<HTMLDivElement | null>(null)
+      useClickOutside(ref, handler, false)
+      return ref
+    })
+
+    const div = document.createElement('div')
+    Object.defineProperty(result.current, 'current', {
+      value: div,
+      writable: true,
+    })
+
+    const outsideElement = document.createElement('button')
+    document.body.appendChild(outsideElement)
+
+    outsideElement.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+
+    expect(handler).not.toHaveBeenCalled()
+
+    document.body.removeChild(outsideElement)
+  })
 })
