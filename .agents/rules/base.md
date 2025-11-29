@@ -114,9 +114,14 @@ This document contains all development rules and guidelines for this project, ap
 
 ### TDD Approach
 
+- **Mandatory Red-Green-Refactor Cycle**: All development MUST follow this workflow:
+  1. **Red**: Write a failing test that defines the desired behavior. Run the test to verify it fails.
+  2. **Green**: Implement the minimal code to make the test pass. Run the test to verify it passes.
+  3. **Refactor**: Improve the code while keeping tests green (optional step, only when needed).
 - **Failing Test First**: Always start with a failing test before implementing new functionality.
 - **Single Test**: Write only one test at a time; never create more than one test per change.
 - **Complete Coverage**: Ensure every new feature or bugfix is covered by a test.
+- **Verify Failure**: After writing a test, run it to ensure it fails before implementing the feature. This confirms the test is properly validating the new behavior.
 
 ### Test Structure & Style
 
