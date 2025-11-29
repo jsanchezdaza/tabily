@@ -105,9 +105,9 @@ This document contains all development rules and guidelines for this project, ap
 
 ### Testing Strategy Distinction
 
-- **Unit Tests**: Fast, isolated tests for individual components and hooks (majority of test suite).
+- **Unit Tests**: Fast, isolated tests for individual components and hooks (majority of test suite). Use Vitest via `pnpm run test:unit`.
 - **Integration Tests**: Test interactions between components and external systems (limited, focused).
-- **E2E Tests**: Full system validation (minimal, critical user paths only).
+- **E2E Tests**: Full system validation (minimal, critical user paths only). Use Playwright MCP tools by default for interactive testing and debugging.
 - **Test Pyramid**: Follow the test pyramid - many unit tests, some integration tests, few E2E tests.
 
 ## 10. Test-Driven Development Rules
@@ -173,27 +173,39 @@ This document contains all development rules and guidelines for this project, ap
 - `pnpm run format` — Formats the code (Prettier).
 - `pnpm run format:check` — Checks the code format.
 - `pnpm run type-check` — Runs TypeScript type checking.
-- `pnpm run test` — Runs unit tests.
-- `pnpm run test:e2e` — Runs end-to-end tests.
-- `pnpm run validate` — Runs tests, linting, and type checking (test, lint, type-check).
+- `pnpm run test:unit` — Runs unit tests (Vitest).
+- `pnpm run test` — Runs end-to-end tests (Playwright). Use Playwright MCP tools for interactive e2e testing.
+- `pnpm run validate` — Runs unit tests, linting, type checking, and build (test:unit --run, lint, build).
 
 ### Usage Rules
 
-1. **Testing**: When running tests, use `pnpm run test` or `pnpm run test:e2e` as appropriate.
-2. **Formatting**: For formatting, use `pnpm run format` or `pnpm run format:check`.
-3. **Type Checking**: For type checking, use `pnpm run type-check`.
-4. **Style Checks**: For style checks, use `pnpm run lint`.
-5. **Building**: For building or updating the app, use `pnpm run build`.
-6. **New Operations**: If a new operation is needed, prefer adding a new script in `package.json` rather than running a tool directly.
+1. **Unit Testing**: For unit tests (Vitest), use `pnpm run test:unit`.
+2. **E2E Testing**: For end-to-end tests, use Playwright MCP tools by default for interactive testing and debugging. Use `pnpm run test` only for running existing test suites.
+3. **Formatting**: For formatting, use `pnpm run format` or `pnpm run format:check`.
+4. **Type Checking**: For type checking, use `pnpm run type-check`.
+5. **Style Checks**: For style checks, use `pnpm run lint`.
+6. **Building**: For building or updating the app, use `pnpm run build`.
+7. **New Operations**: If a new operation is needed, prefer adding a new script in `package.json` rather than running a tool directly.
 
 ### Good vs Bad Examples
 
 ```sh
 # Good: Use pnpm script for unit tests
-pnpm run test
+pnpm run test:unit
 
 # Bad: Call vitest directly
 vitest
+
+# Good: Use Playwright MCP tools for e2e testing
+mcp__playwright__browser_navigate
+mcp__playwright__browser_click
+mcp__playwright__browser_snapshot
+
+# Acceptable: Use pnpm script to run existing e2e test suites
+pnpm run test tests/trip-planner.spec.ts
+
+# Bad: Call playwright directly
+playwright test
 ```
 
 ## 12. Pre-Commit Validation (MANDATORY)

@@ -11,9 +11,21 @@ export function useCreateTrip() {
       setLoading(true)
       setError(null)
 
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) {
+        setError('User not authenticated')
+        return null
+      }
+
       const { data, error: supabaseError } = await supabase
         .from('trips')
-        .insert(tripData)
+        .insert({
+          ...tripData,
+          user_id: user.id,
+        })
         .select()
         .single()
 
