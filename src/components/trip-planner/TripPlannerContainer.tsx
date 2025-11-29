@@ -19,7 +19,7 @@ function TripPlannerContainer() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-white rounded-2xl shadow-xl p-8">
+      <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8" data-testid="trip-planner-card">
         {currentStep === 1 && (
           <DestinationStep
             value={formData.destination}
