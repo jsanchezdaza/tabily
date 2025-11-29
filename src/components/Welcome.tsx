@@ -24,12 +24,12 @@ function Welcome() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 lg:mb-0">
                 <Link
-                  to={user ? '/home' : '/login'}
+                  to={user ? '/plan-trip' : '/login'}
                   className="border-2 border-emerald-300 text-emerald-300 px-8 py-3 rounded-full font-medium text-center transition-all hover:bg-emerald-300/10"
                 >
                   Get Started
                 </Link>
-              </div>
+              </div>{' '}
             </div>
 
             <div className="order-1 lg:order-2 lg:flex-1 flex justify-center items-center lg:px-0 lg:pr-0">
