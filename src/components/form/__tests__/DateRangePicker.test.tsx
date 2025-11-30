@@ -74,4 +74,14 @@ describe('DateRangePicker', () => {
 
     expect(screen.getByText(/end date must be after start date/i)).toBeInTheDocument()
   })
+
+  it('has appearance-none class for Safari styling', () => {
+    render(<DateRangePicker startDate="" endDate="" onChange={vi.fn()} />)
+
+    const startInput = screen.getByLabelText(/start date/i)
+    const endInput = screen.getByLabelText(/end date/i)
+
+    expect(startInput).toHaveClass('appearance-none', 'block', 'bg-white')
+    expect(endInput).toHaveClass('appearance-none', 'block', 'bg-white')
+  })
 })
