@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-interface TripData {
+export interface TripData {
   destination: string
   startDate: string
   endDate: string
