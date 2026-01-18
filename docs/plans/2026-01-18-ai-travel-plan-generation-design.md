@@ -18,27 +18,31 @@ Generate a day-by-day travel itinerary using AI after the user completes the tri
 ### Edge Function: `generate-travel-plan`
 
 **Input:**
+
 ```typescript
 {
-  destination: string;    // e.g., "Tokyo, Japan"
-  startDate: string;      // e.g., "2024-02-15"
-  endDate: string;        // e.g., "2024-02-20"
-  budget: string;         // e.g., "moderate" | "budget" | "luxury"
+  destination: string // e.g., "Tokyo, Japan"
+  startDate: string // e.g., "2024-02-15"
+  endDate: string // e.g., "2024-02-20"
+  budget: string // e.g., "moderate" | "budget" | "luxury"
 }
 ```
 
 **Output:**
+
 ```typescript
 {
-  plan: string;  // Generated itinerary as markdown
+  plan: string // Generated itinerary as markdown
 }
 ```
 
 **Environment variables:**
+
 - `OPENROUTER_API_KEY` - OpenRouter API key
 - `OPENROUTER_MODEL` - Model ID (optional, defaults to `openai/gpt-4o-mini`)
 
 **Error responses:**
+
 - 400 Bad Request - Invalid input
 - 502 Bad Gateway - OpenRouter API error
 - 500 Internal Server Error - Missing configuration
@@ -46,56 +50,64 @@ Generate a day-by-day travel itinerary using AI after the user completes the tri
 ### Frontend Components
 
 **New hook: `useGeneratePlan.ts`**
+
 - Calls the Edge Function
 - Manages loading/error/success states
 - Returns `{ generate, isLoading, error, plan }`
 
 **New component: `TripPlanResult.tsx`**
+
 - Renders the generated markdown itinerary
 - "Plan another trip" button to return to form
 
 **State machine:**
+
 ```typescript
 type PlannerState =
   | { step: 'form' }
   | { step: 'generating' }
-  | { step: 'result', plan: string }
-  | { step: 'error', message: string }
+  | { step: 'result'; plan: string }
+  | { step: 'error'; message: string }
 ```
 
 ### Files to Create/Modify
 
-| File | Action |
-|------|--------|
+| File                                               | Action |
+| -------------------------------------------------- | ------ |
 | `supabase/functions/generate-travel-plan/index.ts` | Create |
-| `src/hooks/useGeneratePlan.ts` | Create |
-| `src/components/TripPlanResult.tsx` | Create |
-| Trip planner flow | Modify |
+| `src/hooks/useGeneratePlan.ts`                     | Create |
+| `src/components/TripPlanResult.tsx`                | Create |
+| Trip planner flow                                  | Modify |
 
 ## Testing Strategy
 
 **Unit tests (Vitest):**
+
 - `useGeneratePlan` hook with mocked Supabase
 - `TripPlanResult` component rendering
 - State transitions
 
 **Edge Function tests:**
+
 - Input validation
 - Prompt construction
 - Error handling
 
 **E2E tests (Playwright):**
+
 - Full flow with mocked Edge Function response
 - Error state handling
 
 ## Scope
 
 **In scope (MVP):**
+
 - Generate day-by-day itinerary
 - Display the result
 - Configurable AI model
 
 **Out of scope:**
+
 - Saving the generated plan
 - Regeneration
 - Streaming response
@@ -103,9 +115,9 @@ type PlannerState =
 
 ## Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
+| Decision         | Choice        | Rationale                            |
+| ---------------- | ------------- | ------------------------------------ |
 | API key location | Edge Function | Security - key not exposed to client |
-| Response display | All at once | Simpler than streaming for MVP |
-| Plan storage | None | YAGNI - display only for now |
-| Default model | GPT-4o-mini | Cost efficient for MVP |
+| Response display | All at once   | Simpler than streaming for MVP       |
+| Plan storage     | None          | YAGNI - display only for now         |
+| Default model    | GPT-4o-mini   | Cost efficient for MVP               |
