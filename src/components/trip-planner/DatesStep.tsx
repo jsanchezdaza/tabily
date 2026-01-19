@@ -14,11 +14,17 @@ interface DatesStepProps {
 }
 
 function DatesStep({ startDate, endDate, onChange, onNext, onBack, errors }: DatesStepProps) {
+  const isEndDateBeforeStart = !!(startDate && endDate && endDate < startDate)
+
   const handleNext = () => {
     if (startDate && endDate) {
       onNext()
     }
   }
+
+  const dateErrors = isEndDateBeforeStart
+    ? { ...errors, end_date: 'End date must be after start date' }
+    : errors
 
   return (
     <div className="space-y-6">
@@ -27,13 +33,17 @@ function DatesStep({ startDate, endDate, onChange, onNext, onBack, errors }: Dat
         startDate={startDate}
         endDate={endDate}
         onChange={onChange}
-        errors={errors}
+        errors={dateErrors}
       />
       <div className="flex gap-4">
         <Button onClick={onBack} variant="secondary" className="flex-1">
           Back
         </Button>
-        <Button onClick={handleNext} disabled={!startDate || !endDate} className="flex-1">
+        <Button
+          onClick={handleNext}
+          disabled={!startDate || !endDate || isEndDateBeforeStart}
+          className="flex-1"
+        >
           Next
         </Button>
       </div>
