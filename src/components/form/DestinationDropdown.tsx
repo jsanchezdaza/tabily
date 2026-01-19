@@ -1,4 +1,5 @@
 import { POPULAR_CITIES } from '../../constants/cities'
+import { inputBaseClasses } from '../ui/Input'
 
 interface DestinationDropdownProps {
   value: string
@@ -16,7 +17,7 @@ function DestinationDropdown({ value, onChange, error }: DestinationDropdownProp
         id="destination"
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
+        className={inputBaseClasses}
       >
         <option value="">Select a destination</option>
         {POPULAR_CITIES.map(city => (

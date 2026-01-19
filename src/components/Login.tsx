@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 import PageLayout from './layout/PageLayout'
 import Card from './ui/Card'
 import Button from './ui/Button'
+import Input from './ui/Input'
 import GoogleIcon from './icons/GoogleIcon'
 import AuthErrorBanner from './auth/AuthErrorBanner'
 import PasswordInput from './PasswordInput'
@@ -87,20 +88,15 @@ function Login() {
             {errors.auth && <AuthErrorBanner message={errors.auth} />}
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
-                  placeholder="you@example.com"
-                />
-                {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
-              </div>
+              <Input
+                id="email"
+                label="Email"
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                error={errors.email}
+              />
 
               <PasswordInput
                 id="password"

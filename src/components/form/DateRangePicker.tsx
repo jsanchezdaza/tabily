@@ -1,3 +1,5 @@
+import { inputBaseClasses } from '../ui/Input'
+
 interface DateRangePickerProps {
   startDate: string
   endDate: string
@@ -9,6 +11,8 @@ interface DateRangePickerProps {
 }
 
 function DateRangePicker({ startDate, endDate, onChange, errors }: DateRangePickerProps) {
+  const dateInputClasses = `${inputBaseClasses} appearance-none bg-white`
+
   return (
     <div className="space-y-4">
       <div>
@@ -20,7 +24,7 @@ function DateRangePicker({ startDate, endDate, onChange, errors }: DateRangePick
           type="date"
           value={startDate}
           onChange={e => onChange({ start_date: e.target.value })}
-          className="appearance-none block w-full max-w-full bg-white px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
+          className={dateInputClasses}
         />
         {errors?.start_date && <p className="mt-2 text-sm text-red-600">{errors.start_date}</p>}
       </div>
@@ -34,7 +38,7 @@ function DateRangePicker({ startDate, endDate, onChange, errors }: DateRangePick
           type="date"
           value={endDate}
           onChange={e => onChange({ end_date: e.target.value })}
-          className="appearance-none block w-full max-w-full bg-white px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-300 focus:border-transparent outline-none transition"
+          className={dateInputClasses}
         />
         {errors?.end_date && <p className="mt-2 text-sm text-red-600">{errors.end_date}</p>}
       </div>
