@@ -12,7 +12,9 @@ function TripPlanResult({ plan, onPlanAnother }: TripPlanResultProps) {
       <div className="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
         <MarkdownRenderer content={plan} />
       </div>
-      <Button onClick={onPlanAnother} className="px-6">Plan another trip</Button>
+      <Button onClick={onPlanAnother} className="px-6">
+        Plan another trip
+      </Button>
     </div>
   )
 }
