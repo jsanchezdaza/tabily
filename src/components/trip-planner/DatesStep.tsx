@@ -1,3 +1,4 @@
+import Button from '../ui/Button'
 import DateRangePicker from '../form/DateRangePicker'
 
 interface DatesStepProps {
@@ -29,19 +30,12 @@ function DatesStep({ startDate, endDate, onChange, onNext, onBack, errors }: Dat
         errors={errors}
       />
       <div className="flex gap-4">
-        <button
-          onClick={onBack}
-          className="flex-1 border-2 border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition duration-200"
-        >
+        <Button onClick={onBack} variant="secondary" className="flex-1">
           Back
-        </button>
-        <button
-          onClick={handleNext}
-          disabled={!startDate || !endDate}
-          className="flex-1 bg-emerald-300 text-gray-900 py-3 rounded-lg font-medium hover:bg-emerald-400 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
+        </Button>
+        <Button onClick={handleNext} disabled={!startDate || !endDate} className="flex-1">
           Next
-        </button>
+        </Button>
       </div>
     </div>
   )

@@ -27,14 +27,6 @@ function Header() {
           </Link>
 
           <nav className="flex items-center gap-6">
-            {user && (
-              <Link
-                to="/trips"
-                className="text-gray-300 hover:text-emerald-300 transition-colors font-medium"
-              >
-                My trips
-              </Link>
-            )}
             {user ? (
               <div className="relative" ref={dropdownRef}>
                 <ProfileButton user={user} onClick={handleProfileClick} />

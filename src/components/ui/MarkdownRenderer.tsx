@@ -8,7 +8,7 @@ interface MarkdownRendererProps {
   className?: string
 }
 
-export function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
+function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
   return (
     <div className={`prose prose-slate max-w-none dark:prose-invert ${className}`}>
       <ReactMarkdown
@@ -120,3 +120,5 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
     </div>
   )
 }
+
+export default MarkdownRenderer

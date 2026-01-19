@@ -81,7 +81,7 @@ describe('DateRangePicker', () => {
     const startInput = screen.getByLabelText(/start date/i)
     const endInput = screen.getByLabelText(/end date/i)
 
-    expect(startInput).toHaveClass('appearance-none', 'block', 'bg-white')
-    expect(endInput).toHaveClass('appearance-none', 'block', 'bg-white')
+    expect(startInput).toHaveClass('appearance-none', 'bg-white')
+    expect(endInput).toHaveClass('appearance-none', 'bg-white')
   })
 })
