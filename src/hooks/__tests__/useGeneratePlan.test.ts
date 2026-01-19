@@ -56,4 +56,27 @@ describe('useGeneratePlan', () => {
 
     expect(mockInvoke).toHaveBeenCalledWith('generate-travel-plan', { body: tripData })
   })
+
+  it('sets plan on successful generation', async () => {
+    const mockPlan = '# Day 1\nVisit Tokyo Tower'
+    vi.spyOn(supabaseModule.supabase.functions, 'invoke').mockResolvedValue({
+      data: { plan: mockPlan },
+      error: null,
+    })
+
+    const { result } = renderHook(() => useGeneratePlan())
+
+    await act(async () => {
+      await result.current.generate({
+        destination: 'Tokyo',
+        startDate: '2024-03-01',
+        endDate: '2024-03-05',
+        budget: 'moderate',
+      })
+    })
+
+    expect(result.current.plan).toBe(mockPlan)
+    expect(result.current.isLoading).toBe(false)
+    expect(result.current.error).toBeNull()
+  })
 })

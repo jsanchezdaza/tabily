@@ -25,7 +25,20 @@ export function useGeneratePlan(): GeneratePlanResult {
     setError(null)
     setPlan(null)
 
-    await supabase.functions.invoke('generate-travel-plan', { body: tripData })
+    try {
+      const { data, error: invokeError } = await supabase.functions.invoke('generate-travel-plan', {
+        body: tripData,
+      })
+
+      if (invokeError) {
+        setError(invokeError.message)
+        return
+      }
+
+      setPlan(data.plan)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return { isLoading, error, plan, generate }
