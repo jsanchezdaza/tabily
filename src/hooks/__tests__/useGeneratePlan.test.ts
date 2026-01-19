@@ -79,4 +79,46 @@ describe('useGeneratePlan', () => {
     expect(result.current.isLoading).toBe(false)
     expect(result.current.error).toBeNull()
   })
+
+  it('sets error on failed generation', async () => {
+    vi.spyOn(supabaseModule.supabase.functions, 'invoke').mockResolvedValue({
+      data: null,
+      error: { message: 'API error' },
+    })
+
+    const { result } = renderHook(() => useGeneratePlan())
+
+    await act(async () => {
+      await result.current.generate({
+        destination: 'Tokyo',
+        startDate: '2024-03-01',
+        endDate: '2024-03-05',
+        budget: 'moderate',
+      })
+    })
+
+    expect(result.current.error).toBe('API error')
+    expect(result.current.isLoading).toBe(false)
+    expect(result.current.plan).toBeNull()
+  })
+
+  it('sets error on exception', async () => {
+    vi.spyOn(supabaseModule.supabase.functions, 'invoke').mockRejectedValue(
+      new Error('Network error')
+    )
+
+    const { result } = renderHook(() => useGeneratePlan())
+
+    await act(async () => {
+      await result.current.generate({
+        destination: 'Tokyo',
+        startDate: '2024-03-01',
+        endDate: '2024-03-05',
+        budget: 'moderate',
+      })
+    })
+
+    expect(result.current.error).toBe('Network error')
+    expect(result.current.isLoading).toBe(false)
+  })
 })
