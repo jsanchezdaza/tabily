@@ -5,6 +5,7 @@ export interface Trip {
   start_date: string
   end_date: string
   budget_preference: 'free' | 'poor' | 'moderate' | 'unlimited'
+  plan: string | null
   created_at: string
   updated_at: string
 }

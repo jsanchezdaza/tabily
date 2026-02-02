@@ -12,7 +12,7 @@ interface GeneratePlanResult {
   isLoading: boolean
   error: string | null
   plan: string | null
-  generate: (tripData: TripData) => Promise<void>
+  generate: (tripData: TripData) => Promise<string | null>
 }
 
 export function useGeneratePlan(): GeneratePlanResult {
@@ -20,7 +20,7 @@ export function useGeneratePlan(): GeneratePlanResult {
   const [error, setError] = useState<string | null>(null)
   const [plan, setPlan] = useState<string | null>(null)
 
-  const generate = async (tripData: TripData): Promise<void> => {
+  const generate = async (tripData: TripData): Promise<string | null> => {
     setIsLoading(true)
     setError(null)
     setPlan(null)
@@ -32,13 +32,15 @@ export function useGeneratePlan(): GeneratePlanResult {
 
       if (invokeError) {
         setError(invokeError.message)
-        return
+        return null
       }
 
       setPlan(data.plan)
+      return data.plan as string
     } catch (err) {
       const message = err instanceof Error ? err.message : 'An error occurred'
       setError(message)
+      return null
     } finally {
       setIsLoading(false)
     }
