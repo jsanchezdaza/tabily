@@ -9,6 +9,7 @@ const mockPreviousStep = vi.fn()
 const mockUpdateFormData = vi.fn()
 const mockCreateTrip = vi.fn()
 const mockGenerate = vi.fn()
+const mockUpdatePlan = vi.fn()
 
 let mockCurrentStep = 1
 let mockFormData = {
@@ -44,6 +45,14 @@ vi.mock('../../../hooks/useGeneratePlan', () => ({
     error: mockError,
     plan: mockPlan,
     generate: mockGenerate,
+  }),
+}))
+
+vi.mock('../../../hooks/useUpdateTripPlan', () => ({
+  useUpdateTripPlan: () => ({
+    loading: false,
+    error: null,
+    updatePlan: mockUpdatePlan,
   }),
 }))
 
