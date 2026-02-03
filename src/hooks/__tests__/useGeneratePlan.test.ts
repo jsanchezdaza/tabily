@@ -57,7 +57,7 @@ describe('useGeneratePlan', () => {
     expect(mockInvoke).toHaveBeenCalledWith('generate-travel-plan', { body: tripData })
   })
 
-  it('sets plan on successful generation', async () => {
+  it('sets plan on successful generation and returns it', async () => {
     const mockPlan = '# Day 1\nVisit Tokyo Tower'
     vi.spyOn(supabaseModule.supabase.functions, 'invoke').mockResolvedValue({
       data: { plan: mockPlan },
@@ -66,8 +66,9 @@ describe('useGeneratePlan', () => {
 
     const { result } = renderHook(() => useGeneratePlan())
 
+    let returnedPlan: string | null = null
     await act(async () => {
-      await result.current.generate({
+      returnedPlan = await result.current.generate({
         destination: 'Tokyo',
         startDate: '2024-03-01',
         endDate: '2024-03-05',
@@ -75,12 +76,13 @@ describe('useGeneratePlan', () => {
       })
     })
 
+    expect(returnedPlan).toBe(mockPlan)
     expect(result.current.plan).toBe(mockPlan)
     expect(result.current.isLoading).toBe(false)
     expect(result.current.error).toBeNull()
   })
 
-  it('sets error on failed generation', async () => {
+  it('returns null on failed generation', async () => {
     vi.spyOn(supabaseModule.supabase.functions, 'invoke').mockResolvedValue({
       data: null,
       error: { message: 'API error' },
@@ -88,8 +90,9 @@ describe('useGeneratePlan', () => {
 
     const { result } = renderHook(() => useGeneratePlan())
 
+    let returnedPlan: string | null = 'not-null'
     await act(async () => {
-      await result.current.generate({
+      returnedPlan = await result.current.generate({
         destination: 'Tokyo',
         startDate: '2024-03-01',
         endDate: '2024-03-05',
@@ -97,20 +100,21 @@ describe('useGeneratePlan', () => {
       })
     })
 
+    expect(returnedPlan).toBeNull()
     expect(result.current.error).toBe('API error')
     expect(result.current.isLoading).toBe(false)
-    expect(result.current.plan).toBeNull()
   })
 
-  it('sets error on exception', async () => {
+  it('returns null on exception', async () => {
     vi.spyOn(supabaseModule.supabase.functions, 'invoke').mockRejectedValue(
       new Error('Network error')
     )
 
     const { result } = renderHook(() => useGeneratePlan())
 
+    let returnedPlan: string | null = 'not-null'
     await act(async () => {
-      await result.current.generate({
+      returnedPlan = await result.current.generate({
         destination: 'Tokyo',
         startDate: '2024-03-01',
         endDate: '2024-03-05',
@@ -118,6 +122,7 @@ describe('useGeneratePlan', () => {
       })
     })
 
+    expect(returnedPlan).toBeNull()
     expect(result.current.error).toBe('Network error')
     expect(result.current.isLoading).toBe(false)
   })

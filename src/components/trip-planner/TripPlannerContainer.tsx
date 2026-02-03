@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTripPlannerState } from '../../hooks/useTripPlannerState'
 import { useCreateTrip } from '../../hooks/useCreateTrip'
 import { useGeneratePlan } from '../../hooks/useGeneratePlan'
+import { useUpdateTripPlan } from '../../hooks/useUpdateTripPlan'
 import TripPlanResult from '../TripPlanResult'
 import DestinationStep from './DestinationStep'
 import DatesStep from './DatesStep'
@@ -14,17 +15,21 @@ function TripPlannerContainer() {
   const { currentStep, formData, nextStep, previousStep, updateFormData } = useTripPlannerState()
   const { loading, createTrip } = useCreateTrip()
   const { isLoading, error, plan, generate } = useGeneratePlan()
+  const { updatePlan } = useUpdateTripPlan()
 
   const handleSubmit = async () => {
     const tripId = await createTrip(formData)
     if (tripId) {
       setPhase('generating')
-      await generate({
+      const generatedPlan = await generate({
         destination: formData.destination,
         startDate: formData.start_date,
         endDate: formData.end_date,
         budget: formData.budget_preference,
       })
+      if (generatedPlan) {
+        updatePlan(tripId, generatedPlan)
+      }
     }
   }
 
